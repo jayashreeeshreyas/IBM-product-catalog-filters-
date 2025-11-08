@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Product Catalog with Filters</title>
+</head>
+<body>
+  <h2>Product Catalog with Filters</h2>
+
+  <label>Category:
+    <select id="category">
+      <option value="all">All</option>
+      <option value="electronics">Electronics</option>
+      <option value="fashion">Fashion</option>
+    </select>
+  </label>
+
+  <div id="products"></div>
+
+  <script>
+    const products = [
+      { name: "Phone", category: "electronics" },
+      { name: "Headphones", category: "electronics" },
+      { name: "Shirt", category: "fashion" },
+      { name: "Watch", category: "fashion" }
+    ];
+
+    function showProducts(filter) {
+      const list = document.getElementById("products");
+      list.innerHTML = "";
+      products
+        .filter(p => filter === "all" || p.category === filter)
+        .forEach(p => list.innerHTML += <p>${p.name} (${p.category})</p>);
+    }
+
+    document.getElementById("category").addEventListener("change", e => {
+      showProducts(e.target.value);
+    });
+
+    showProducts("all");
+  </script>
+</body>
+</html>
